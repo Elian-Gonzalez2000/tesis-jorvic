@@ -1,0 +1,34 @@
+h2 {
+   margin: 3rem auto 3rem auto;
+   text-align: center;
+}
+
+.create-timeline {
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   justify-content: space-between;
+   align-items: center;
+   gap: 3rem;
+   width: 100%;
+}
+
+.create-timeline div {
+   text-align: center;
+}
+
+.create-timeline input {
+   width: 100%;
+}
+
+.create-timeline button {
+   width: 50%;
+   margin: auto;
+   grid-column: span 2;
+}
+
+.create-timeline label {
+   display: inline-block;
+   font-size: 1.25rem;
+   font-weight: bold;
+   margin-bottom: 1rem;
+}
