@@ -1,30 +1,36 @@
 const { sequelize } = require("../index.js");
 const { DataTypes } = require("sequelize");
 
-const ActivityModel = sequelize.define(
-   "Activity",
+const TimelineModel = sequelize.define(
+   "Timeline",
    {
-      name: {
-         type: DataTypes.STRING,
-         allowNull: false,
-         min: 3,
-         max: 20,
-      },
-      date: {
-         type: DataTypes.STRING,
-         allowNull: false,
-         min: 3,
-         max: 20,
-      },
-      area: {
-         type: DataTypes.ENUM("Cultura", "CRA", "Manos a la siembra", "CNAE"),
-         allowNull: false,
-      },
-      evidence: {
+      days: {
          type: DataTypes.STRING,
          allowNull: false,
       },
-      description: {
+      content: {
+         type: DataTypes.STRING,
+         allowNull: false,
+      },
+      activities: {
+         type: DataTypes.STRING,
+         allowNull: false,
+      },
+      estrategy: {
+         type: DataTypes.STRING,
+         allowNull: false,
+      },
+      resource: {
+         type: DataTypes.STRING,
+         allowNull: false,
+      },
+
+      observations: {
+         type: DataTypes.TEXT,
+         allowNull: false,
+      },
+
+      dates: {
          type: DataTypes.TEXT,
          allowNull: false,
       },
@@ -32,4 +38,4 @@ const ActivityModel = sequelize.define(
    { timestamps: false }
 );
 
-module.exports = { ActivityModel };
+module.exports = { TimelineModel };

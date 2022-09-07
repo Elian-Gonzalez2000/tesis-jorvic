@@ -18,18 +18,21 @@ function Activities() {
                   <div className="activity-card">
                      <h4>Name</h4>
                      <p>fecha</p>
+                     <p>Area</p>
                      <p>descripcion</p>
                      <img src={evidencias1} className="activity-img" />
                   </div>
                   <div className="activity-card">
                      <h4>Name</h4>
                      <p>fecha</p>
+                     <p>Area</p>
                      <p>descripcion</p>
                      <img src={evidencias1} className="activity-img" />
                   </div>
                   <div className="activity-card">
                      <h4>Name</h4>
                      <p>fecha</p>
+                     <p>Area</p>
                      <p>descripcion</p>
                      <img src={evidencias1} className="activity-img" />
                   </div>

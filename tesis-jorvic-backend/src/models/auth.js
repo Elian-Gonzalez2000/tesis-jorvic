@@ -1,7 +1,7 @@
-const { sequelize } = require("../index.js");
+const { db } = require("../app.js");
 const { DataTypes } = require("sequelize");
 
-const AuthModel = sequelize.define(
+const AuthModel = db.sequelize.define(
    "Auth",
    {
       firstName: {

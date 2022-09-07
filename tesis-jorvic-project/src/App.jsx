@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./containers/HomePage";
 import "./App.css";
-import Users from "./containers/users";
-import Activities from "./containers/activities";
+import Users from "./containers/Users";
+import Activities from "./containers/Activities";
 import Login from "./containers/Login";
 
 function App() {
