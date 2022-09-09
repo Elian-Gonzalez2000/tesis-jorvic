@@ -10,7 +10,10 @@ const Header = () => {
                <Link to="/">Inicio</Link>
             </li>
             <li>
-               <Link to="/crear-actividad">Crear Actividad</Link>
+               <Link to="/actividades">Actividades</Link>
+            </li>
+            <li>
+               <Link to="/timeline">Cronogramas</Link>
             </li>
             <li>
                <Link to="/login">Iniciar sesion</Link>
