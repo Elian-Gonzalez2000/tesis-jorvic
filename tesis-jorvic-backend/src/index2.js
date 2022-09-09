@@ -5,6 +5,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 const router = require("express").Router();
 const authRoutes = require("./router/auth.js");
+const adminRoutes = require("./router/admin/auth.js");
 const activitiesRoutes = require("./router/activities.js");
 const app = express();
 
@@ -37,6 +38,7 @@ app.use(
    })
 ); //Allow everyone to share resources
 app.use("/api", authRoutes);
+app.use("/api", adminRoutes);
 app.use("/api", activitiesRoutes);
 
 app.get("/", (req, res) => {

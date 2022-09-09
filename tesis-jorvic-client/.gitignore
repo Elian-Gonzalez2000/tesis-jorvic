@@ -107,3 +107,6 @@ dist
 package-lock.json
 
 .prettierignore
+
+# Images
+src/assets/

@@ -15,6 +15,13 @@ function Users() {
          email: "pollito23@gmail.com",
          role: "usuario",
       },
+      {
+         nombre: "Jorvic",
+         apellido: "Cespedes",
+         cedula: "28578369",
+         email: "pollito23@gmail.com",
+         role: "usuario",
+      },
    ]);
    const table = useTable({ columns, data });
    const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
