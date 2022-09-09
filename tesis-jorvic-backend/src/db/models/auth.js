@@ -1,4 +1,4 @@
-const { sequelize } = require("../index.js");
+const { sequelize } = require("../connection");
 const { DataTypes } = require("sequelize");
 
 const AuthModel = sequelize.define(

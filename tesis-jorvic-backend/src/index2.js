@@ -16,7 +16,7 @@ const { DB_PORT, DB_HOST, DB_PASSWORD, DB_USER, PORT } = process.env;
 // Sequelize connection
 const sequelize = new Sequelize(`tesis-jorvic`, `${DB_USER}`, "", {
    host: "localhost",
-   dialect: "mysql",
+   dialect: "postgres",
 })
    .authenticate()
    .then(() => {
