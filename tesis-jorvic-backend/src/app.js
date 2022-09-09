@@ -6,7 +6,14 @@ const app = express();
 
 app.use(express.json()); // Acept format JSON in requests
 app.use(morgan("dev")); // Log info
-app.use(cors()); // Allow everyone to share resources
+app.use(
+   cors({
+      origin: "*",
+      credentials: true,
+      methods: ["GET", "POST", "PUT", "DELETE"],
+      allowedHeaders: ["Content-Type", "Authorization"],
+   })
+); // Allow everyone to share resources
 app.use(routes); // Routes
 
 module.exports = { app };
