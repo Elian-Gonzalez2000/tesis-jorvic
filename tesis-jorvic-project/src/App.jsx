@@ -4,13 +4,24 @@ import "./App.css";
 import Users from "./containers/Users";
 import Activities from "./containers/Activities";
 import Login from "./containers/Login";
+import PrivateRoute from "./components/HOC/PrivateRoute";
+import CreateActivities from "./containers/CreateActivities";
 
 function App() {
    return (
       <div className="App">
          <Router>
             <Routes>
-               <Route path="/" exact element={<HomePage />} />
+               <Route
+                  path="/"
+                  exact
+                  element={<PrivateRoute component={HomePage} />}
+               />
+               <Route
+                  path="/actividades/crear-actividades"
+                  exact
+                  element={<CreateActivities />}
+               />
                <Route path="/usuarios-registrados" exact element={<Users />} />
                <Route path="/actividades" exact element={<Activities />} />
                <Route path="/login" exact element={<Login />} />

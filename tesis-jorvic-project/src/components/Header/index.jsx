@@ -1,21 +1,21 @@
 import React, { useState } from "react";
+import { Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./index.css";
 
 const Header = () => {
-   const [sesion, setSesion] = useState(false);
+   const token = window.localStorage.getItem("user");
+
    return (
       <nav className="nav-bar">
          <ul>
-            {!sesion ? (
+            {!token ? (
                <li>
-                  <Link to="/login" onClick={(e) => setSesion(!sesion)}>
-                     Iniciar sesion
-                  </Link>
+                  <Link to="/login">Iniciar sesion</Link>
                </li>
             ) : (
                <li>
-                  <Link to="/" onClick={(e) => setSesion(!sesion)}>
+                  <Link to="/login" onClick={(e) => localStorage.clear()}>
                      Cerrar sesion
                   </Link>
                </li>

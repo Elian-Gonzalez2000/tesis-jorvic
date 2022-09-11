@@ -1,9 +1,10 @@
-.activities-container {
+.activities-cards-container {
    width: 100%;
-   margin: auto;
-   margin-top: 3rem;
+   margin: 3rem auto;
    display: flex;
+   flex-wrap: wrap;
    justify-content: space-between;
+   gap: 4rem;
    align-items: center;
 }
 
@@ -18,4 +19,19 @@
 .activity-card .activity-img {
    width: 100%;
    height: 300px;
+}
+
+.activity-card h4 {
+   font-size: 1.2rem;
+   font-weight: 600;
+   letter-spacing: 1px;
+   padding: 1.5rem 1rem;
+   color: var(--black-color);
+}
+
+.activity-card p {
+   letter-spacing: 1px;
+   line-height: 1.5rem;
+   padding: 0 1rem;
+   padding-bottom: 1rem;
 }
