@@ -1,42 +1,63 @@
 const { AuthModel } = require("../db/models/auth");
 
-exports.signin = (req, res) => {
-   User.findOne({ email: req.body.email }).exec(async (error, user) => {
-      if (user)
-         return res.status(400).json({
-            message: "Admin already registered",
+exports.signin = async (req, res) => {
+   try {
+      const { email, password, role } = req.body;
+
+      if (!email.trim()) {
+         return res
+            .status(406)
+            .json({ message: "El correo electronico no puede ser vacío" });
+      }
+
+      if (!password.trim()) {
+         return res
+            .status(406)
+            .json({ message: "La contraseña no puede ser vacío" });
+      }
+      if (role === "admin") {
+         return res
+            .status(406)
+            .json({ message: "Esta cuenta no es un usuario" });
+      }
+
+      const user = await AuthModel.findAll({
+         where: {
+            email: email,
+            hash_password: password,
+            role: role,
+         },
+      });
+      if (user.length > 0) {
+         //console.log("Usuario ", user[0].dataValues);
+         const {
+            firstName,
+            lastName,
+            username,
+            identificationCard,
+            email,
+            role,
+         } = user[0].dataValues;
+         res.status(200).json({
+            user: {
+               firstName,
+               lastName,
+               username,
+               identificationCard,
+               email,
+               role,
+            },
          });
+      } else {
+         return res.status(400).json({ message: "Algo fue mal" });
+      }
 
-      const { firstName, lastName, email, password } = req.body;
-      const hash_password = bcrypt.hash(password, 10);
-      const _user = new User({
-         firstName,
-         lastName,
-         email,
-         hash_password,
-         username: shortid.generate(),
-         role: "admin",
-      });
-
-      _user.save((error, data) => {
-         if (error) {
-            return res.status(400).json({
-               message: "Something went wrong ",
-               error: error,
-            });
-         }
-
-         if (data) {
-            return res.status(201).json({
-               message: "Admin created  successfuly",
-            });
-         }
-      });
-   });
+      console.log(user);
+   } catch (error) {
+      console.log(error);
+   }
 };
-exports.signup = (req, res) => {
-   res.status(200).json("nice");
-};
+
 exports.signup = async (req, res) => {
    try {
       const {
@@ -49,36 +70,50 @@ exports.signup = async (req, res) => {
          role,
       } = req.body;
 
-      if (!firstName) {
+      const user = await AuthModel.findAll({
+         where: {
+            email: email,
+            role: role,
+         },
+      });
+      if (user.length > 0) {
+         console.log(user);
+         return res.status(400).json({
+            message: "User already registered",
+         });
+      }
+
+      if (!firstName.trim()) {
          return res
             .status(406)
             .json({ message: "El nombre no puede ser vacío" });
       }
-      if (!lastName) {
+      if (!lastName.trim()) {
          return res
             .status(406)
             .json({ message: "El apellido no puede ser vacío" });
       }
-      if (!identificationCard) {
+      if (!identificationCard.trim()) {
          return res.status(406).json({
             message: "El numero de identificacion no puede ser vacío",
          });
       }
-      if (!username) {
+      if (!username.trim()) {
          return res
             .status(406)
             .json({ message: "El nombre de usuario no puede ser vacío" });
       }
-      if (!email) {
+      if (!email.trim()) {
          return res
             .status(406)
             .json({ message: "El correo electronico no puede ser vacío" });
       }
-      if (!password) {
+      if (!password.trim()) {
          return res
             .status(406)
-            .json({ message: "La contraseña no puede ser vacío" });
+            .json({ message: "La contraseña no puede estar vacía" });
       }
+
       const userData = {
          firstName,
          lastName,
@@ -90,7 +125,7 @@ exports.signup = async (req, res) => {
       };
       let newUser = await AuthModel.create(userData);
       if (newUser) {
-         res.json({ message: "actor creado correctamente", data: newUser });
+         res.json({ message: "Usuario creado correctamente", data: newUser });
       }
    } catch (error) {
       console.log(error);

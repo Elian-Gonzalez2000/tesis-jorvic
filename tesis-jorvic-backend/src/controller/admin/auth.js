@@ -3,6 +3,7 @@ const { AuthModel } = require("../../db/models/auth");
 exports.signin = async (req, res) => {
    try {
       const { email, password, role } = req.body;
+      console.log(email, password);
 
       if (!email) {
          return res
@@ -23,6 +24,7 @@ exports.signin = async (req, res) => {
          where: {
             email: email,
             hash_password: password,
+            role: role,
          },
       });
       if (user.length > 0) {
@@ -70,10 +72,11 @@ exports.signup = async (req, res) => {
       const user = await AuthModel.findAll({
          where: {
             email: email,
+            role: role,
          },
       });
       if (user.length > 0) {
-         console.log(user);
+         //console.log(user);
          return res.status(400).json({
             message: "Admin already registered",
          });
@@ -121,11 +124,9 @@ exports.signup = async (req, res) => {
       };
       let newUser = await AuthModel.create(userData);
       if (newUser) {
-         res.json({ message: "actor creado correctamente", data: newUser });
+         res.json({ message: "Usuario creado correctamente", data: newUser });
       }
    } catch (error) {
       console.log(error);
    }
 };
-
-exports;

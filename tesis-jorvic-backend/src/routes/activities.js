@@ -1,5 +1,8 @@
 const router = require("express").Router();
-const { activities } = require("../controller/activities.js");
+const {
+   createActivities,
+   getAllActivities,
+} = require("../controller/activities.js");
 const multer = require("multer");
 const path = require("path");
 const shortid = require("shortid");
@@ -12,8 +15,11 @@ const storage = multer.diskStorage({
       cb(null, `${shortid.generate()}-${file.originalname}`);
    },
 });
+//console.log(path.dirname(__dirname));
+const upload = multer({ storage });
 
-router.post("/activities", activities);
+router.get("/activities", getAllActivities);
+router.post("/activities", upload.array("productPicture"), createActivities);
 
 router.use((_req, res) => res.status(404).json("Not found"));
 

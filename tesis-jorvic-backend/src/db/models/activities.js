@@ -16,10 +16,11 @@ const ActivitiesModel = sequelize.define(
          type: DataTypes.STRING,
          allowNull: false,
       },
-      image: {
-         type: DataTypes.ARRAY(DataTypes.STRING),
+      images: {
+         type: DataTypes.STRING,
          allowNull: true,
       },
+      createdByUser: { type: DataTypes.STRING, allowNull: true },
    },
    { timestamps: false }
 );
