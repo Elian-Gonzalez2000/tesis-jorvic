@@ -4,6 +4,8 @@ import logo from "../../assets/WhatsApp Image 2022-08-26 at 6.50.45 AM.jpeg";
 import "./index.css";
 import Container from "../../components/UI/Container";
 import Button from "../../components/UI/Button";
+import { Link } from "react-router-dom";
+import { FaEdit, FaTree, FaUtensils } from "react-icons/fa";
 
 const Home = () => {
    return (
@@ -33,13 +35,16 @@ const Home = () => {
                      laudantium dolorum quam repudiandae. Quos minus nulla quas
                      assumenda fuga beatae obcaecati ducimus quia?
                   </p>
-                  <button>Iniciar Sesion</button>
+                  <button>
+                     <Link to={"/login"}> Iniciar Sesion</Link>
+                  </button>
                </div>
             </section>
             <section className="activities">
                <h2>Actividades principales</h2>
-               <div className="activities-container">
+               <div className="major-activities-container">
                   <div>
+                     <FaEdit />
                      <h4>Coordinación del Centro de Recursos (CRA)</h4>
                      <p>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -52,6 +57,7 @@ const Home = () => {
                      Sed, veritatis.
                   </div>
                   <div>
+                     <FaUtensils />
                      <h4>
                         Coordinación de Corporación Nacional de Alimento Escolar
                         (CENAE)
@@ -62,6 +68,7 @@ const Home = () => {
                      </p>
                   </div>
                   <div>
+                     <FaTree />
                      <h4>Coordinación manos a la siembra</h4>
                      <p>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.

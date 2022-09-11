@@ -9,9 +9,10 @@ const Input = ({
    onChange,
    errorMessage,
    error,
+   className,
 }) => {
    return (
-      <div className="input">
+      <div className={`input ${className ? className : ""}`}>
          <label>{label}</label>
          <input
             type={type}

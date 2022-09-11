@@ -72,7 +72,7 @@ function Timeline() {
       table;
    return (
       <Layout>
-         <Container>
+         <Container className={"timeline-container"}>
             <h2>Cronogramas de actividades</h2>
             <Button url="./crear-cronograma">Crear cronograma</Button>
             {/* Añadimos las propiedades a nuestra tabla nativa */}

@@ -2,7 +2,7 @@
    width: 100vw;
    padding: 1rem 0;
    text-align: center;
-   background-color: #f2f2f2;
+   background-color: var(--first-color);
 }
 
 .nav-bar ul {
@@ -20,7 +20,8 @@
 .nav-bar a {
    font-size: 1.2rem;
    font-weight: bolder;
-   letter-spacing: 1px;
+   letter-spacing: 2px;
+   color: var(--white-color);
    transition: color 0.3s ease-out;
 }
 

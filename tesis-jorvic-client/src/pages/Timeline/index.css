@@ -1,12 +1,33 @@
 table {
    border-collapse: collapse;
-   border: 2px solid rgb(200, 200, 200);
+   border: 2px solid #6d6a6a;
    letter-spacing: 1px;
-   font-size: 0.8rem;
+   font-size: 0.9rem;
+   margin: auto;
+   margin-bottom: 3rem;
 }
 
-td,
-th {
-   border: 1px solid rgb(190, 190, 190);
+td {
+   border: 1px solid #6d6a6a;
    padding: 5px 10px;
+}
+
+tr :first-child {
+   border: 1px solid #6d6a6a;
+   padding: 5px 10px;
+   background-color: var(--first-color);
+   color: var(--white-color);
+   font-weight: bold;
+}
+
+th {
+   border: 1px solid #6d6a6a;
+   padding: 5px 10px;
+   background-color: var(--first-color);
+   color: var(--white-color);
+   font-weight: bold;
+}
+
+.timeline-container button {
+   margin-bottom: 2rem;
 }

@@ -10,7 +10,7 @@ function CreateTimeline() {
             <h2>Crear Cronogramas</h2>
             <form className="create-timeline">
                <div>
-                  <label>Dia Lunes</label>
+                  <h4>Dia Lunes</h4>
                   <Input
                      label={"Dia: "}
                      type={"text"}
@@ -63,7 +63,7 @@ function CreateTimeline() {
                   />
                </div>
                <div>
-                  <label>Dia Martes</label>
+                  <h4>Dia Martes</h4>
                   <Input
                      label={"Dia: "}
                      type={"text"}
@@ -116,7 +116,7 @@ function CreateTimeline() {
                   />
                </div>
                <div>
-                  <label>Dia Miercoles</label>
+                  <h4>Dia Miercoles</h4>
                   <Input
                      label={"Dia: "}
                      type={"text"}
@@ -169,7 +169,7 @@ function CreateTimeline() {
                   />
                </div>
                <div>
-                  <label>Dia Jueves</label>
+                  <h4>Dia Jueves</h4>
                   <Input
                      label={"Dia: "}
                      type={"text"}

@@ -36,14 +36,6 @@
    margin-bottom: 2rem;
 }
 
-.about button {
-   padding: 0.5rem 0.75rem;
-   background-color: #f3f3f3;
-   outline: none;
-   border: thin solid #222;
-   border-radius: 5px;
-}
-
 /* activities */
 .activities {
    width: 100%;
@@ -61,11 +53,30 @@
    margin-bottom: 2rem;
 }
 
-.activities-container {
+.major-activities-container {
    width: 100%;
    display: grid;
-   grid-template-columns: repeat(2, 35%);
+   grid-template-columns: repeat(2, 40%);
    grid-template-rows: repeat(2, 1fr);
    gap: 4rem;
    justify-content: space-evenly;
+   text-align: center;
+}
+
+.major-activities-container h4 {
+   padding-bottom: 1rem;
+   font-size: 1.15rem;
+   font-weight: bold;
+   text-align: center;
+}
+
+.major-activities-container h2 {
+   font-size: 1.3rem;
+   font-weight: 600;
+}
+
+.major-activities-container svg {
+   width: 2rem;
+   height: 2rem;
+   margin-bottom: 1rem;
 }
