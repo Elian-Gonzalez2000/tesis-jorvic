@@ -5,13 +5,13 @@ exports.signin = async (req, res) => {
       const { email, password, role } = req.body;
       console.log(email, password);
 
-      if (!email) {
+      if (!email.trim()) {
          return res
             .status(406)
             .json({ message: "El correo electronico no puede ser vacío" });
       }
 
-      if (!password) {
+      if (!password.trim()) {
          return res
             .status(406)
             .json({ message: "La contraseña no puede ser vacío" });
@@ -54,6 +54,10 @@ exports.signin = async (req, res) => {
       console.log(user);
    } catch (error) {
       console.log(error);
+      res.status(400).json({
+         message: "Algo salio mal",
+         data: error,
+      });
    }
 };
 
@@ -82,32 +86,32 @@ exports.signup = async (req, res) => {
          });
       }
 
-      if (!firstName) {
+      if (!firstName.trim()) {
          return res
             .status(406)
             .json({ message: "El nombre no puede ser vacío" });
       }
-      if (!lastName) {
+      if (!lastName.trim()) {
          return res
             .status(406)
             .json({ message: "El apellido no puede ser vacío" });
       }
-      if (!identificationCard) {
+      if (!identificationCard.trim()) {
          return res.status(406).json({
             message: "El numero de identificacion no puede ser vacío",
          });
       }
-      if (!username) {
+      if (!username.trim()) {
          return res
             .status(406)
             .json({ message: "El nombre de usuario no puede ser vacío" });
       }
-      if (!email) {
+      if (!email.trim()) {
          return res
             .status(406)
             .json({ message: "El correo electronico no puede ser vacío" });
       }
-      if (!password) {
+      if (!password.trim()) {
          return res
             .status(406)
             .json({ message: "La contraseña no puede estar vacía" });
@@ -128,5 +132,9 @@ exports.signup = async (req, res) => {
       }
    } catch (error) {
       console.log(error);
+      res.status(400).json({
+         message: "Algo salio mal",
+         data: error,
+      });
    }
 };
