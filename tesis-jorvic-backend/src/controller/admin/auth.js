@@ -1,5 +1,48 @@
 const { AuthModel } = require("../../db/models/auth");
 
+exports.getAllUsers = async (req, res) => {
+   try {
+      const users = await AuthModel.findAll();
+      if (users) {
+         //console.log(activities);
+         res.status(200).json(users);
+      }
+   } catch (error) {
+      console.log(error);
+      res.status(400).json({
+         message: "Algo salio mal",
+         data: error,
+      });
+   }
+};
+
+exports.getUserByName = async (req, res) => {
+   const { useremail } = req.params;
+   try {
+      const user = await AuthModel.findAll({
+         where: {
+            email: email,
+         },
+      });
+      if (user && user.length === 0) {
+         //console.log(activities);
+         res.status(400).json({
+            message: "No se encontro el usuario " + email,
+         });
+      }
+      if (user) {
+         //console.log(activities);
+         res.status(200).json(user);
+      }
+   } catch (error) {
+      console.log(error);
+      res.status(400).json({
+         message: "Algo salio mal",
+         data: error,
+      });
+   }
+};
+
 exports.signin = async (req, res) => {
    try {
       const { email, password, role } = req.body;
@@ -54,7 +97,7 @@ exports.signin = async (req, res) => {
       console.log(user);
    } catch (error) {
       console.log(error);
-      res.status(400).json({
+      return res.status(400).json({
          message: "Algo salio mal",
          data: error,
       });
@@ -72,6 +115,15 @@ exports.signup = async (req, res) => {
          password,
          role,
       } = req.body;
+      /* console.log({
+         firstName,
+         lastName,
+         identificationCard,
+         username,
+         email,
+         password,
+         role,
+      }); */
 
       const user = await AuthModel.findAll({
          where: {
@@ -133,6 +185,106 @@ exports.signup = async (req, res) => {
    } catch (error) {
       console.log(error);
       res.status(400).json({
+         message: "Algo salio mal",
+         data: error,
+      });
+   }
+};
+
+exports.getUserByName = async (req, res) => {
+   const { useremail } = req.params;
+   try {
+      const user = await AuthModel.findAll({
+         where: {
+            email: useremail,
+         },
+      });
+      if (user && user.length === 0) {
+         //console.log(activities);
+         return res.status(400).json({
+            message: "No se encontro el usuario " + email,
+         });
+      }
+      if (user) {
+         //console.log(activities);
+         return res.status(200).json(user);
+      }
+   } catch (error) {
+      console.log(error);
+      return res.status(400).json({
+         message: "Algo salio mal",
+         data: error,
+      });
+   }
+};
+
+exports.editUserByEmail = async (req, res) => {
+   const { useremail } = req.params;
+   const {
+      firstName,
+      lastName,
+      identificationCard,
+      username,
+      email,
+      password,
+      role,
+   } = req.body;
+   try {
+      const userUpdated = await AuthModel.update(
+         {
+            firstName,
+            lastName,
+            identificationCard,
+            username,
+            email,
+            hash_password: password,
+            role,
+         },
+         {
+            where: { email: useremail },
+         }
+      );
+      if (userUpdated) {
+         //console.log(activities);
+         return res.status(200).json(userUpdated);
+      }
+      if (userUpdated && userUpdated.length === 0) {
+         //console.log(activities);
+         return res.status(400).json({
+            message: "No se encontro el usuario " + useremail,
+         });
+      }
+   } catch (error) {
+      console.log(error);
+      return res.status(400).json({
+         message: "Algo salio mal",
+         data: error,
+      });
+   }
+};
+
+exports.deleteUserByEmail = async (req, res) => {
+   const { useremail } = req.params;
+
+   try {
+      const userDelete = await AuthModel.destroy({
+         where: { email: useremail },
+      });
+      if (userDelete) {
+         //console.log(activities);
+         return res
+            .status(200)
+            .json({ message: "Usuario borrado", delete: userDelete });
+      }
+      if (!userDelete) {
+         //console.log(activities);
+         return res.status(400).json({
+            message: "No se encontro el usuario " + useremail,
+         });
+      }
+   } catch (error) {
+      console.log(error);
+      return res.status(400).json({
          message: "Algo salio mal",
          data: error,
       });

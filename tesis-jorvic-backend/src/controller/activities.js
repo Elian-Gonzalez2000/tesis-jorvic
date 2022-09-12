@@ -3,7 +3,7 @@ const { ActivitiesModel } = require("../db/models/activities");
 exports.createActivities = async (req, res) => {
    try {
       const { name, date, description, createdByUser } = req.body;
-      console.log(name, date, description, createdByUser);
+      //console.log(name, date, description, createdByUser);
 
       if (!name.trim()) {
          return res
@@ -54,12 +54,16 @@ exports.createActivities = async (req, res) => {
    }
 };
 
-exports.getActivitiesBySlug = async (req, res) => {
+exports.getActivitiesById = async (req, res) => {
    try {
-      const { slug } = req.params;
+      const { id } = req.params;
+      const activity = await ActivitiesModel.findByPk(id);
+      if (activity) {
+         res.status(200).json(activity);
+      }
    } catch (error) {
       console.log(error);
-      return res.status(400).json({ error });
+      return res.status(400).json({ message: "Algo salio mal", error });
    }
 };
 
@@ -68,7 +72,7 @@ exports.getAllActivities = async (req, res) => {
       const activities = await ActivitiesModel.findAll();
       if (activities) {
          //console.log(activities);
-         res.status(201).json(activities);
+         res.status(200).json(activities);
       }
    } catch (error) {
       console.log(error);

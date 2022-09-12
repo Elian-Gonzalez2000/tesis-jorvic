@@ -2,6 +2,7 @@ const router = require("express").Router();
 const {
    createActivities,
    getAllActivities,
+   getActivitiesById,
 } = require("../controller/activities.js");
 const multer = require("multer");
 const path = require("path");
@@ -20,6 +21,7 @@ const upload = multer({ storage });
 
 router.get("/activities", getAllActivities);
 router.post("/activities", upload.array("productPicture"), createActivities);
+router.post("/activities/:id", getActivitiesById);
 
 router.use((_req, res) => res.status(404).json("Not found"));
 

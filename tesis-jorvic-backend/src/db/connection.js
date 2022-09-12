@@ -8,6 +8,8 @@ const {
 } = require("../../config.js");
 
 const sequelize = new Sequelize(`tesis-jorvic`, `${DB_USER}`, "", {
+   logging: false,
+   native: false,
    host: "localhost",
    dialect: "mysql",
 });
