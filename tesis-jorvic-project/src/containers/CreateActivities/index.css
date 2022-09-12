@@ -1,6 +1,27 @@
+.create-activities h2 {
+   text-align: center;
+   margin-bottom: 2rem;
+}
+
+.input input {
+   width: 50%;
+   margin-bottom: 1rem;
+}
+
+label {
+   display: inline-block;
+   font-weight: bolder;
+}
+
+.create-activities button {
+   width: 25%;
+}
+
 textarea {
+   width: 50%;
    resize: vertical;
    display: block;
    margin: auto;
    margin-top: 1rem;
+   padding: 1rem;
 }

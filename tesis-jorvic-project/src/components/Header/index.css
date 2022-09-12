@@ -2,7 +2,7 @@
    width: 100vw;
    padding: 1rem 0;
    text-align: center;
-   background-color: #f2f2f2;
+   background-color: #dedddd;
 }
 
 .nav-bar ul {
@@ -26,5 +26,5 @@
 }
 
 .nav-bar a:hover {
-   color: aqua;
+   color: #0b4fce;
 }

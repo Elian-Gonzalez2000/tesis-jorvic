@@ -1,35 +1,164 @@
-import React from "react";
-import { useTable } from "react-table";
+import React, { useState, useEffect } from "react";
+import { useTable, useRowSelect } from "react-table";
 import useRows from "../../hooks/useRows";
 import useColumns from "../../hooks/useColumns";
 import Layout from "../../components/Layout";
+import axios from "../../helpers/axios";
+import Button from "../../components/UI/Button";
+import Swal from "sweetalert2";
 import "./index.css";
 
+const IndeterminateCheckbox = React.forwardRef(
+   ({ indeterminate, ...rest }, ref) => {
+      const defaultRef = React.useRef();
+      const resolvedRef = ref || defaultRef;
+
+      //console.log(resolvedRef);
+      React.useEffect(() => {
+         resolvedRef.current.indeterminate = indeterminate;
+      }, [resolvedRef, indeterminate]);
+
+      return (
+         <>
+            <input type="checkbox" ref={resolvedRef} {...rest} />
+         </>
+      );
+   }
+);
+
 function Users() {
+   const [usersData, setUsersData] = useState([]);
    const columns = useColumns();
-   const data = useRows([
-      {
-         nombre: "Juan",
-         apellido: "Cespedes",
-         cedula: "28578369",
-         email: "pollito23@gmail.com",
-         role: "usuario",
-      },
-      {
-         nombre: "Jorvic",
-         apellido: "Cespedes",
-         cedula: "28578369",
-         email: "pollito23@gmail.com",
-         role: "usuario",
-      },
-   ]);
-   const table = useTable({ columns, data });
-   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-      table;
+   //let data = useRows([]);
+
+   useEffect(() => {
+      axios
+         .get("/admin/getallusers")
+         .then((res) => {
+            //console.log(res.data);
+            setUsersData(
+               res.data.map((user) => {
+                  return {
+                     nombre: user.firstName,
+                     apellido: user.lastName,
+                     cedula: user.identificationCard,
+                     email: user.email,
+                     role: user.role,
+                  };
+               })
+            );
+         })
+         .catch((error) => {
+            console.log(error.response.data);
+         });
+   }, []);
+
+   const table = useTable(
+      { columns, data: usersData && usersData },
+      useRowSelect,
+      (hooks) => {
+         hooks.visibleColumns.push((columns) => [
+            // Let's make a column for selection
+            {
+               id: "selection",
+               // The header can use the table's getToggleAllRowsSelectedProps method
+               // to render a checkbox
+               /* Header: ({ getToggleAllRowsSelectedProps }) => (
+                  <div>
+                     <IndeterminateCheckbox
+                        {...getToggleAllRowsSelectedProps()}
+                     />
+                  </div>
+               ), */
+               // The cell can use the individual row's getToggleRowSelectedProps method
+               // to the render a checkbox
+               Cell: ({ row }) => {
+                  //console.log(row);
+                  return (
+                     <div>
+                        <IndeterminateCheckbox
+                           {...row.getToggleRowSelectedProps()}
+                        />
+                     </div>
+                  );
+               },
+            },
+            ...columns,
+         ]);
+      }
+   );
+   const {
+      getTableProps,
+      getTableBodyProps,
+      headerGroups,
+      rows,
+      prepareRow,
+      selectedFlatRows,
+   } = table;
+
+   if (selectedFlatRows.length > 1) {
+      Swal.fire({
+         title: "Error!",
+         text: "Solo debes seleccionar un usuario a la vez",
+         icon: "info",
+         confirmButtonText: "Entendido",
+      });
+   }
+
+   if (selectedFlatRows && selectedFlatRows.length === 1) {
+      console.log(selectedFlatRows);
+   }
+
+   const userDelete = (e) => {
+      const useremail = selectedFlatRows[0].original.email;
+      //console.log(useremail);
+      axios
+         .delete(`/admin/user/${useremail}`)
+         .then((res) => {
+            console.log(res.data);
+            axios
+               .get("/admin/getallusers")
+               .then((users) => {
+                  //console.log(res.data);
+                  setUsersData(
+                     users.data.map((user) => {
+                        return {
+                           nombre: user.firstName,
+                           apellido: user.lastName,
+                           cedula: user.identificationCard,
+                           email: user.email,
+                           role: user.role,
+                        };
+                     })
+                  );
+               })
+               .catch((error) => {
+                  console.log(error.response.data);
+               });
+         })
+         .catch((error) => {
+            console.log(error.response.data);
+         });
+   };
 
    return (
       <Layout>
          <div className="users">
+            <Button url={"/usuarios-registrados/crear-usuarios"}>
+               Crear usuario
+            </Button>
+            {selectedFlatRows && selectedFlatRows.length === 1 ? (
+               <Button
+                  url={`/usuarios-registrados/editar-usuario/${selectedFlatRows[0].original.email}`}
+               >
+                  Editar usuario
+               </Button>
+            ) : null}
+            {selectedFlatRows && selectedFlatRows.length === 1 ? (
+               <Button url={``} onClick={userDelete}>
+                  Eliminar usuario
+               </Button>
+            ) : null}
             {/* Añadimos las propiedades a nuestra tabla nativa */}
             <table {...getTableProps()}>
                <thead>

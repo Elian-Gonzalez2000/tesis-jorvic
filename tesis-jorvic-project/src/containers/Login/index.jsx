@@ -32,7 +32,7 @@ function Login() {
             setUser({ ...token });
          })
          .catch((error) => {
-            console.log(error.response.data.message);
+            console.log(error.response.data);
          });
    };
    if (token) {

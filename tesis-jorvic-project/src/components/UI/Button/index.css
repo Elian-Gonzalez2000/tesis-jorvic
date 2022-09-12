@@ -4,4 +4,5 @@ button {
    outline: none;
    border: thin solid #222;
    border-radius: 5px;
+   cursor: pointer;
 }

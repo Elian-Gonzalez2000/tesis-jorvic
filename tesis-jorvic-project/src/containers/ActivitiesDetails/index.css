@@ -1,0 +1,32 @@
+.activities-details-container {
+   margin: auto;
+}
+
+.activities-details-container h2 {
+   margin-bottom: 2rem;
+   font-weight: bolder;
+}
+
+.activities-details-container section {
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   grid-template-rows: auto;
+   justify-content: center;
+   gap: 4rem;
+}
+
+.activities-details-container section :first-child {
+   grid-column: span 2;
+}
+
+.activities-details-container span {
+   display: inline-block;
+   font-weight: bolder;
+}
+.activities-details-container p {
+   margin-bottom: 1.5rem;
+}
+
+/* .activities-details-container .details-images {
+   min-height: 100%;
+} */
